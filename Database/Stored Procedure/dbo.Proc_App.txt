@@ -1,0 +1,81 @@
+USE [bank]
+GO
+/****** Object:  StoredProcedure [dbo].[Proc_App]    Script Date: 11/9/2020 10:16:22 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/****** Script for SelectTopNRows command from SSMS  ******/
+
+
+ALTER Proc [dbo].[Proc_App]
+( 
+	@Action varchar(100)=null,
+	@admin_refid varchar(100)=null,	
+	@first_name varchar(100)=null,
+	@last_name varchar(100)=null,
+	@account_no varchar(100)=null,
+	@occupation varchar(100)=null,
+	@email varchar(100)=null,
+	@username varchar(100)=null,
+	@password varchar(100)=null,
+	@birthday varchar(100)=null,
+	@gender varchar(100)=null,
+	@phone varchar(100)=null,
+	@street varchar(100)=null,
+	@district varchar(100)=null,
+	@state varchar(100)=null,
+	@debit_card varchar(100)=null,
+	@credit_card varchar(100)=null,
+	@net_banking varchar(100)=null
+)
+
+as
+
+
+
+begin
+     
+	if (@Action='insert')
+         begin 
+		insert into userDetails(admin_refid,first_name,last_name,account_no,occupatiopn,
+		                         email,username,password,birthday,gender,phone,street,
+								 district,state,debit_card,credit_card,net_banking) 
+			 values(@admin_refid,@first_name,@last_name,@account_no,@occupation,
+			 @email,@username,@password,@birthday,@gender,@phone,@street,
+			 @district,@state,@debit_card,@credit_card,@net_banking);
+         end
+
+		    
+	 if(@Action='getPassword')
+	     begin
+	
+	select * from userDetails where username=@admin_refid; /*because 2nd entry from login page is email and second entry in table is first_name*/
+		 end
+	
+	 if(@Action ='infoCheck')
+	     begin
+    select * from userDetails where account_no=@admin_refid OR username=@first_name; 
+	     end
+
+	 if(@Action ='infoCheck1')
+	     begin
+    select * from userDetails where account_no=@admin_refid AND username=@first_name; 
+	     end
+    
+	 if(@Action ='updatePassword')
+	     begin
+    update userDetails set password=@first_name where email=@admin_refid; 
+	     end
+	 
+	 if(@Action='getInfo')
+	    begin
+       select * from userDetails where username=@admin_refid;
+	    end
+	 
+	 end
+
+
+		
+ 
+	
