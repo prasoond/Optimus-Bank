@@ -2,6 +2,7 @@
 2. This just a practice project in which we can easily undderstand the flow of data and requests 
    in an Model View Control(MVC) Architecture.
 3. Microsoft SQL server is used for database purpose.
+4. Stored Procedures are used instead of regular SQL queries from JAVA.
 4. All the web pages are downloaded from online resources.
 5. All the dependecies of the projject are mentioned in pom.xml from line 18.
 
